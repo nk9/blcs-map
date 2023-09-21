@@ -13,6 +13,13 @@ import cells from 'public/static/gis/cells.geojson'
 import filters from 'public/static/gis/filters.geojson'
 
 export default function BLCSMap() {
+    const cellColors = [
+        1, '#b950e9',
+        2, '#fcf006',
+        3, '#e735c9',
+        4, '#1a41ed',
+        5, '#fe9400',
+        6, '#2d921e']
     const layers = {
         boundary: {
             layer: boundary,
@@ -47,7 +54,7 @@ export default function BLCSMap() {
                 'id': 'cells',
                 'type': 'fill',
                 'paint': {
-                    'fill-color': "#0b0",
+                    'fill-color': ['match', ['get', 'traffshed'], ...cellColors, '#AAAAAA'],
                     'fill-opacity': 0.15
                 }
             } 
