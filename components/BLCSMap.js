@@ -31,7 +31,7 @@ export default function BLCSMap() {
                     'line-color': 'red',
                     'line-opacity': 1,
                     'line-width': 2,
-                    'line-dasharray': [10, 4],
+                    'line-dasharray': [5, 2],
                 }
             }
         },
@@ -59,18 +59,48 @@ export default function BLCSMap() {
                 }
             } 
         },
-        filters: {
+        existing_filters: {
             layer: filters,
             interactive: false,
             style: {
-                'id': 'filters',
+                'id': 'existing_filters',
                 'type': 'circle',
                 'paint': {
-                    'circle-color': 'green',
-                    'circle-opacity': 1
-                }
+                    'circle-color': 'black',
+                    'circle-opacity': 1,
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': 'black',
+                },
+                'filter': ['==', ['get', 'existing'], 1]
             }
-        }
+        },
+        new_filters: {
+            layer: filters,
+            interactive: false,
+            style: {
+                'id': 'new_filters',
+                'type': 'circle',
+                'paint': {
+                    'circle-color': 'white',
+                    'circle-opacity': 1,
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': 'red',
+                },
+                'filter': ['==', ['get', 'existing'], 0]
+            }
+        },
+        one_way_filters: {
+            layer: filters,
+            interactive: false,
+            style: {
+                'id': 'one_way_filters',
+                'type': 'symbol',
+                'layout': {
+                    'icon-image': 'road-closure'
+                },
+                'filter': ['==', ['get', 'existing'], 3]
+            }
+        },
     }
 
     const [layersVisibility, setLayersVisibility] = React.useReducer((state, updates) => ({ ...state, ...updates }),
