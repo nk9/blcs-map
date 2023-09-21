@@ -1,0 +1,20 @@
+.container {
+    display: grid;
+    grid-template-columns: min-content auto;
+    column-gap: .7rem;
+
+    .key {
+        font-weight: bold;
+        text-align: right;
+        white-space: nowrap;
+    }
+}
+
+.notes {
+    margin-top: .5rem;
+}
+
+.headline {
+    margin-top: 0;
+    margin-bottom: 4px;
+}
