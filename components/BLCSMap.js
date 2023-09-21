@@ -20,6 +20,7 @@ export default function BLCSMap() {
         4, '#1a41ed',
         5, '#fe9400',
         6, '#2d921e']
+
     const layers = {
         boundary: {
             layer: boundary,
@@ -40,10 +41,12 @@ export default function BLCSMap() {
             interactive: false,
             style: {
                 'id': 'access',
-                'type': 'circle',
-                'paint': {
-                    'circle-color': 'blue',
-                    'circle-opacity': 1
+                'type': 'symbol',
+                'layout': {
+                    'icon-image': 'double-arrow-36',
+                    'icon-rotate': ['get', 'rotation'],
+                    'icon-size': 0.8,
+                    "icon-allow-overlap": true
                 }
             } 
         },
