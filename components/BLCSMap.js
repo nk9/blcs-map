@@ -11,6 +11,7 @@ import access from 'public/static/gis/access.geojson'
 import boundary from 'public/static/gis/boundary.geojson'
 import cells from 'public/static/gis/cells.geojson'
 import filters from 'public/static/gis/filters.geojson'
+import wards from 'public/static/gis/islington-ward-boundaries.geojson'
 
 export default function BLCSMap() {
     const cellColors = [
@@ -35,6 +36,35 @@ export default function BLCSMap() {
                     'line-dasharray': [5, 2],
                 }
             }
+        },
+        ward_boundaries: {
+            layer: wards,
+            interactive: false,
+            style: {
+                'id': 'ward_boundaries',
+                'type': 'line',
+                'paint': {
+                    'line-color': 'blue',
+                    'line-opacity': 1,
+                    'line-width': 1,
+                }
+            }
+        },
+        ward_names: {
+            layer: wards,
+            interactive: false,
+            style: {
+                'id': 'ward_text',
+                'type': 'symbol',
+                'paint': {
+                    'text-color': '#777',
+                },
+                'layout': {
+                    'text-field': ['get', 'NAME'],
+                    'text-size': 20,
+                    'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                },
+            },
         },
         access: {
             layer: access,
@@ -74,6 +104,7 @@ export default function BLCSMap() {
                     'circle-stroke-width': 2,
                     'circle-stroke-color': 'black',
                 },
+                'layer-before': 'ward_names',
                 'filter': ['==', ['get', 'existing'], 1]
             }
         },
@@ -89,6 +120,7 @@ export default function BLCSMap() {
                     'circle-stroke-width': 2,
                     'circle-stroke-color': 'red',
                 },
+                'layer-before': 'ward_names',
                 'filter': ['==', ['get', 'existing'], 0]
             }
         },
@@ -101,6 +133,7 @@ export default function BLCSMap() {
                 'layout': {
                     'icon-image': 'road-closure'
                 },
+                'layer-before': 'ward_names',
                 'filter': ['==', ['get', 'existing'], 3]
             }
         },
