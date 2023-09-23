@@ -4,7 +4,7 @@ import Map, { Popup, Source, Layer, ScaleControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import lineLength from '@turf/length';
 import styles from "./BLCSMap.module.scss";
-// import ControlPanel from './CIMapControlPanel';
+import ControlPanel from './BLCSMapControlPanel';
 import { deepMerge } from 'src/utilities';
 
 import access from 'public/static/gis/access.geojson'
@@ -167,7 +167,7 @@ export default function BLCSMap() {
         mapLayers.push(
             <Source key={layerID} type="geojson" data={layer}>
                 <Layer key={layerID}
-                    {...style}
+                    {...layerStyle}
                 />
             </Source>
         )
@@ -194,7 +194,7 @@ export default function BLCSMap() {
             {/* hoveredFeature && preparePopover(hoverInfo, hoveredFeature, styles) */}
 
             <ScaleControl />
-            {/*<ControlPanel layers={layers} onChange={setLayersVisibility} />*/}
+            <ControlPanel layers={layers} onChange={setLayersVisibility} />
         </Map>
     )
 }
