@@ -34,12 +34,13 @@ export default function BLCSMap() {
                     'line-opacity': 1,
                     'line-width': 2,
                     'line-dasharray': [5, 2],
-                }
+                },
+                'layer-before': 'ward_boundaries',
             }
         },
         ward_boundaries: {
             layer: wards,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'ward_boundaries',
                 'type': 'line',
@@ -57,7 +58,8 @@ export default function BLCSMap() {
                 'id': 'ward_text',
                 'type': 'symbol',
                 'paint': {
-                    'text-color': '#777',
+                    'text-color': 'blue',
+                    'text-opacity': 0.5,
                 },
                 'layout': {
                     'text-field': ['get', 'NAME'],
