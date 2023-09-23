@@ -41,6 +41,7 @@ export default function BLCSMap() {
         ward_boundaries: {
             layer: wards,
             interactive: false,
+            default_visibility: false,
             style: {
                 'id': 'ward_boundaries',
                 'type': 'line',
@@ -48,12 +49,13 @@ export default function BLCSMap() {
                     'line-color': 'blue',
                     'line-opacity': 1,
                     'line-width': 1,
-                }
+                },
             }
         },
         ward_names: {
             layer: wards,
             interactive: false,
+            default_visibility: false,
             style: {
                 'id': 'ward_text',
                 'type': 'symbol',
@@ -219,7 +221,7 @@ function preparePopover(hoverInfo, feature, styles) {
             }
             break;
         case "one_way_filters":
-            headline = "New One-Way Filter"
+            headline = "Proposed One-Way Filter"
             infoPairs = {
                 "Road": props.name,
             }
