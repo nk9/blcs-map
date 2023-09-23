@@ -40,7 +40,7 @@ export default function BLCSMap() {
         },
         ward_boundaries: {
             layer: wards,
-            interactive: true,
+            interactive: false,
             style: {
                 'id': 'ward_boundaries',
                 'type': 'line',
@@ -70,7 +70,7 @@ export default function BLCSMap() {
         },
         access: {
             layer: access,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'access',
                 'type': 'symbol',
@@ -96,7 +96,7 @@ export default function BLCSMap() {
         },
         existing_filters: {
             layer: filters,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'existing_filters',
                 'type': 'circle',
@@ -112,7 +112,7 @@ export default function BLCSMap() {
         },
         new_filters: {
             layer: filters,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'new_filters',
                 'type': 'circle',
@@ -128,7 +128,7 @@ export default function BLCSMap() {
         },
         one_way_filters: {
             layer: filters,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'one_way_filters',
                 'type': 'symbol',
@@ -143,20 +143,20 @@ export default function BLCSMap() {
 
     const [layersVisibility, setLayersVisibility] = React.useReducer((state, updates) => ({ ...state, ...updates }),
         {});
-    // const [hoverInfo, setHoverInfo] = React.useState(null);
-    // const [hoveredFeature, setHoveredFeature] = React.useState(null);
+    const [hoverInfo, setHoverInfo] = React.useState(null);
+    const [hoveredFeature, setHoveredFeature] = React.useState(null);
 
-    // const onHover = React.useCallback(event => {
-    //     if (event.features.length > 0) {
-    //         setHoveredFeature(event.features[0])
-    //         setHoverInfo({
-    //             longitude: event.lngLat.lng,
-    //             latitude: event.lngLat.lat
-    //         })
-    //     } else {
-    //         setHoveredFeature(null)
-    //     }
-    // }, []);
+    const onHover = React.useCallback(event => {
+        if (event.features.length > 0) {
+            setHoveredFeature(event.features[0])
+            setHoverInfo({
+                longitude: event.lngLat.lng,
+                latitude: event.lngLat.lat
+            })
+        } else {
+            setHoveredFeature(null)
+        }
+    }, []);
 
     const mapLayers = [];
     var interactiveLayerIds = [];
@@ -187,11 +187,11 @@ export default function BLCSMap() {
             mapStyle="mapbox://styles/nkocharh/clmt1bsj702f201qx1mvtdqoh"
             styleDiffing
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-            // onMouseMove={onHover}
+            onMouseMove={onHover}
             interactiveLayerIds={interactiveLayerIds}
         >
             {mapLayers}
-            {/* hoveredFeature && preparePopover(hoverInfo, hoveredFeature, styles) */}
+            {hoveredFeature && preparePopover(hoverInfo, hoveredFeature, styles)}
 
             <ScaleControl />
             <ControlPanel layers={layers} onChange={setLayersVisibility} />
@@ -199,70 +199,63 @@ export default function BLCSMap() {
     )
 }
 
-// function preparePopover(hoverInfo, feature, styles) {
-//     let infoPairs = {}
-//     let headline = ""
-//     let props = feature.properties
+function preparePopover(hoverInfo, feature, styles) {
+    let infoPairs = {}
+    let headline = ""
+    let props = feature.properties
 
-//     switch (feature.layer.id) {
-//         case "protectedSegmentsHover":
-//             headline = "Cycle Track"
-//             const meters = (lineLength(feature) * 1000) || 0;
-//             let length = meters;
+    switch (feature.layer.id) {
+        case "existing_filters":
+            headline = "Existing Filter"
 
-//             if (props.bidi) {
-//                 length = meters * 2;
-//             }
+            infoPairs = {
+                "Road": props.name,
+            }
+            break;
+        case "new_filters":
+            headline = "Proposed Filter"
+            infoPairs = {
+                "Road": props.name,
+            }
+            break;
+        case "one_way_filters":
+            headline = "New One-Way Filter"
+            infoPairs = {
+                "Road": props.name,
+            }
+            break;
+        case "access":
+            headline = "Access Point"
+            infoPairs = {
+                "Road": props.street,
+            }
+            break;
+        default: return
+    }
 
-//             infoPairs = {
-//                 "Road": props.road,
-//                 "Authority": (props.tfl == 1) ? "TfL" : "Council",
-//                 "Bidirectional": (props.bidi == 1) ? "Yes" : "No",
-//                 "Lane meters": length.toFixed() + "m",
-//                 "Open as of": prettyDate(props.completed)
-//             }
-//             break;
-//         case "ltns":
-//             headline = "Low-Traffic Neighbourhood"
-//             infoPairs = {
-//                 "Name": props.Name,
-//                 "Area": props.area.toFixed() + "ha",
-//                 "Open as of": prettyDate(props.begin)
-//             }
-//             break;
-//         case "hubs":
-//             headline = "Cycle Logistics Hub"
-//             infoPairs = {
-//                 "Name": props.name,
-//                 "Open as of": prettyDate(props.begin)
-//             }
-//             break;
-//         default: return
-//     }
+    let infoDivs = []
+    for (let [k, v] of Object.entries(infoPairs)) {
+        infoDivs.push(
+            <div className={styles.key} key={k}>{k}</div>,
+            <div className={styles.value} key={k + '-value'}>{v}</div>
+        )
+    }
 
-//     let infoDivs = []
-//     for (let [k, v] of Object.entries(infoPairs)) {
-//         infoDivs.push(
-//             <div className={styles.key} key={k}>{k}</div>,
-//             <div className={styles.value} key={k + '-value'}>{v}</div>
-//         )
-//     }
+    return (
+        <Popup
+            longitude={hoverInfo.longitude}
+            latitude={hoverInfo.latitude}
+            closeButton={false}
+        >
+            <h3 className={styles.headline}>{headline}</h3>
+            <div className={styles.container}>
+                {infoDivs}
+            </div>
+            {props.notes && <div className={styles.notes}>{props.notes}</div>}
+        </Popup>
 
-//     return (
-//         <Popup
-//             longitude={hoverInfo.longitude}
-//             latitude={hoverInfo.latitude}
-//             closeButton={false}
-//         >
-//             <h3 className={styles.headline}>{headline}</h3>
-//             <div className={styles.container}>
-//                 {infoDivs}
-//             </div>
-//             {props.notes && <div className={styles.notes}>{props.notes}</div>}
-//         </Popup>
-
-//     )
-// }
+    )
+}
 
 // function prettyDate(isoDate) {
 //     if (isoDate) {

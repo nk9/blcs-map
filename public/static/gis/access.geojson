@@ -11,7 +11,7 @@
 { "type": "Feature", "properties": { "id": null, "street": "Waterloo Tr", "bidi": 1, "rotation": 80 }, "geometry": { "type": "Point", "coordinates": [ -0.102847013380236, 51.540484912873964 ] } },
 { "type": "Feature", "properties": { "id": null, "street": "Almeida St", "bidi": 1, "rotation": 87 }, "geometry": { "type": "Point", "coordinates": [ -0.102695016893908, 51.539637717331118 ] } },
 { "type": "Feature", "properties": { "id": null, "street": "Berners Rd", "bidi": 1, "rotation": 299 }, "geometry": { "type": "Point", "coordinates": [ -0.10437867028092, 51.535212409611887 ] } },
-{ "type": "Feature", "properties": { "id": null, "street": "Liverpool Rd", "bidi": 1, "rotation": null }, "geometry": { "type": "Point", "coordinates": [ -0.107137991109632, 51.534732399671739 ] } },
+{ "type": "Feature", "properties": { "id": null, "street": "Liverpool Rd S", "bidi": 1, "rotation": null }, "geometry": { "type": "Point", "coordinates": [ -0.107137991109632, 51.534732399671739 ] } },
 { "type": "Feature", "properties": { "id": null, "street": "Dewey Rd", "bidi": 1, "rotation": 79 }, "geometry": { "type": "Point", "coordinates": [ -0.111364662633275, 51.534405117264861 ] } },
 { "type": "Feature", "properties": { "id": null, "street": "Barnsbury Rd", "bidi": 1, "rotation": 10 }, "geometry": { "type": "Point", "coordinates": [ -0.110957950924036, 51.536215517766792 ] } },
 { "type": "Feature", "properties": { "id": null, "street": "Hemingford Rd", "bidi": 1, "rotation": null }, "geometry": { "type": "Point", "coordinates": [ -0.113855066601562, 51.536910585963923 ] } },
