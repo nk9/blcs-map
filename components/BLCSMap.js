@@ -146,19 +146,27 @@ export default function BLCSMap() {
     const [layersVisibility, setLayersVisibility] = React.useReducer((state, updates) => ({ ...state, ...updates }),
         {});
     const [hoverInfo, setHoverInfo] = React.useState(null);
-    const [hoveredFeature, setHoveredFeature] = React.useState(null);
+    const [activeFeature, setActiveFeature] = React.useState(null);
 
-    const onHover = React.useCallback(event => {
+    const handleClick = (event) => {
+        console.log("clicked", event.features)
         if (event.features.length > 0) {
-            setHoveredFeature(event.features[0])
+            setActiveFeature(event.features[0])
             setHoverInfo({
                 longitude: event.lngLat.lng,
                 latitude: event.lngLat.lat
             })
         } else {
-            setHoveredFeature(null)
+            setActiveFeature(null)
         }
-    }, []);
+    };
+
+    const handleTouchMove = (event) => {
+        console.log("touch moved")
+        if (event.targetTouches.length > 1) {
+            setActiveFeature(null);
+        }
+    };
 
     const mapLayers = [];
     var interactiveLayerIds = [];
@@ -189,11 +197,12 @@ export default function BLCSMap() {
             mapStyle="mapbox://styles/nkocharh/clmt1bsj702f201qx1mvtdqoh"
             styleDiffing
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-            onMouseMove={onHover}
+            onClick={handleClick}
+            onTouchMove={handleTouchMove}
             interactiveLayerIds={interactiveLayerIds}
         >
             {mapLayers}
-            {hoveredFeature && preparePopover(hoverInfo, hoveredFeature, styles)}
+            {activeFeature && preparePopup(hoverInfo, activeFeature, styles, setActiveFeature)}
 
             <ScaleControl />
             <ControlPanel layers={layers} onChange={setLayersVisibility} />
@@ -201,7 +210,7 @@ export default function BLCSMap() {
     )
 }
 
-function preparePopover(hoverInfo, feature, styles) {
+function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
     let infoPairs = {}
     let headline = ""
     let props = feature.properties
@@ -243,11 +252,16 @@ function preparePopover(hoverInfo, feature, styles) {
         )
     }
 
+    const handleClosePopup = () => {
+        setActiveFeature(null);
+    };
+
     return (
         <Popup
             longitude={hoverInfo.longitude}
             latitude={hoverInfo.latitude}
-            closeButton={false}
+            closeButton={true}
+            onClose={handleClosePopup}
         >
             <h3 className={styles.headline}>{headline}</h3>
             <div className={styles.container}>
