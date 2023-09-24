@@ -72,6 +72,7 @@ export default function BLCSMap() {
                     'text-size': 20,
                     'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
                 },
+                'layer-before': 'one_ways',
             },
         },
         one_ways: {
