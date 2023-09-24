@@ -163,11 +163,20 @@ export default function BLCSMap() {
     };
 
     const handleTouchMove = (event) => {
-        console.log("touch moved")
         if (event.targetTouches.length > 1) {
             setActiveFeature(null);
         }
     };
+
+    const handleMouseEnter = (event) => {
+        let canvas = event.originalEvent.target
+        canvas.style.cursor = 'pointer'
+    }
+
+    const handleMouseLeave = (event) => {
+        let canvas = event.originalEvent.target
+        canvas.style.cursor = ''
+    }
 
     const mapLayers = [];
     var interactiveLayerIds = [];
@@ -200,6 +209,8 @@ export default function BLCSMap() {
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             onClick={handleClick}
             onTouchMove={handleTouchMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             interactiveLayerIds={interactiveLayerIds}
         >
             {mapLayers}
