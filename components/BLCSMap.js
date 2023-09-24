@@ -11,6 +11,7 @@ import Link from "src/Link";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 import access from 'public/static/gis/access.geojson'
+import one_ways from 'public/static/gis/one_ways.geojson'
 import boundary from 'public/static/gis/boundary.geojson'
 import cells from 'public/static/gis/cells.geojson'
 import filters from 'public/static/gis/filters.geojson'
@@ -72,6 +73,32 @@ export default function BLCSMap() {
                     'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
                 },
             },
+        },
+        one_ways: {
+            layer: one_ways,
+            interactive: false,
+            style: {
+                'id': 'one_ways',
+                'type': 'line',
+                'paint': {
+                    'line-color': '#01A938',
+                    'line-opacity': 1,
+                    'line-width': 2,
+                    'line-dasharray': [3, 1],
+                },
+            }
+        },
+        one_ways_clickable: {
+            layer: one_ways,
+            interactive: true,
+            style: {
+                'id': 'one_ways_clickable',
+                'type': 'line',
+                'paint': {
+                    'line-width': 15,
+                    'line-opacity': 0
+                },
+            }
         },
         access: {
             layer: access,
@@ -257,6 +284,14 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
                 "Street View": street_view(props.url)
             }
             break;
+        case "one_ways_clickable":
+            console.log("one_ways_clickable??", props)
+            headline = "Changed One-Way Rules"
+            infoPairs = {
+                "Road": props.name,
+                "Street View": street_view(props.url)
+            }
+            break;
         default: return
     }
 
@@ -289,12 +324,3 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
 
     )
 }
-
-// function prettyDate(isoDate) {
-//     if (isoDate) {
-//         const date = new Date(isoDate)
-//         return new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(date)
-//     }
-
-//     return '';
-// }
