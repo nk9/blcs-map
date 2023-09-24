@@ -53,5 +53,16 @@
 
   border: 2px solid;
   border-radius: 50%;
-  // border-color: #000;
+}
+
+.half-square-swatch {
+  height: 0;
+  width: 0;
+  display: inline-block;
+  margin-right: 11px;
+  position: relative;
+  bottom: 0px;
+  left: 4px;
+
+  border: 7px solid;
 }

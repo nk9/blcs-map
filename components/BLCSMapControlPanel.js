@@ -24,9 +24,6 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 
 const hideableLayers = {
     'ward_boundaries': { fullName: "Ward Boundaries", shortName: "Wards" },
-    // 'majorRoads': { fullName: "Major Roads", shortName: "Roads" },
-    // 'ltns': { fullName: "Low-Traffic Neighbourhoods", shortName: "LTNs" },
-    // 'hubs': { fullName: "Cycle Logistics Hubs", shortName: "Hubs" }
 }
 
 // When the hideable layer above has its visibility toggled, also
@@ -88,6 +85,29 @@ function ControlPanel({ layers, onChange }) {
         </Typography>
     </div>)
 
+    const legend_half_square = (color1, color2, title, shortTitle, tooltip) => (
+        <>
+            <span className={styles["half-square-swatch"]} style={{
+                borderTopColor: color1,
+                borderLeftColor: color1,
+                borderRightColor: color2,
+                borderBottomColor: color2
+            }}></span>
+            <Typography variant="body1" sx={{ display: 'inline' }}>
+                <Tooltip title={tooltip} enterTouchDelay={0} leaveTouchDelay={4000}>
+                    <span style={{
+                        textDecoration: 'underline dashed',
+                        WebkitTextDecorationLine: 'underline',
+                        WebkitTextDecorationStyle: 'dashed',
+                    }}>
+                        {isMobile ? shortTitle : title}
+                    </span>
+                </Tooltip>
+            </Typography>
+
+        </>
+    )
+
     return (
         <div className={styles["control-panel"]}>
             <Typography variant="body1" style={{ fontWeight: 'bold' }}>Layers</Typography>
@@ -115,6 +135,7 @@ function ControlPanel({ layers, onChange }) {
                         {legend_circle('#000', '#000', 'Existing Filter', 'Exist.')}
                         {legend_line('blue', 'Ward Boundaries', 'Wards')}
                         {legend_line('red', 'Phase 1', 'Phase 1', true)}
+                        {legend_half_square('rgba(185, 80, 233, 0.35)', 'rgba(254, 148, 0, 0.35)', 'Sub-areas', 'Sub.', 'A sub-area is a network of streets all reachable by motor vehicle without leaving the area.')}
                     </AccordionDetails>
                 </CustomAccordion>
             </div>
