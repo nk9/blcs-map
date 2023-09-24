@@ -58,6 +58,11 @@ function ControlPanel({ layers, onChange }) {
     };
     
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const underlineStyle = {
+        textDecoration: 'underline dashed',
+        WebkitTextDecorationLine: 'underline',
+        WebkitTextDecorationStyle: 'dashed',
+    }
 
     const legend_line = (color, title, shortTitle, isDashed = false) => (
         <Typography variant="body1">
@@ -76,7 +81,7 @@ function ControlPanel({ layers, onChange }) {
         <Typography variant="body1" sx={{ display: 'inline' }}>
             {isMobile ?
                 (<Tooltip title={title} enterTouchDelay={0}>
-                    <span style={{ textDecoration: 'underline dashed' }}>
+                    <span style={underlineStyle}>
                         {shortTitle}
                     </span>
                 </Tooltip>) :
@@ -95,11 +100,7 @@ function ControlPanel({ layers, onChange }) {
             }}></span>
             <Typography variant="body1" sx={{ display: 'inline' }}>
                 <Tooltip title={tooltip} enterTouchDelay={0} leaveTouchDelay={4000}>
-                    <span style={{
-                        textDecoration: 'underline dashed',
-                        WebkitTextDecorationLine: 'underline',
-                        WebkitTextDecorationStyle: 'dashed',
-                    }}>
+                    <span style={underlineStyle}>
                         {isMobile ? shortTitle : title}
                     </span>
                 </Tooltip>
