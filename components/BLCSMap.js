@@ -6,6 +6,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import styles from "./BLCSMap.module.scss";
 import ControlPanel from './BLCSMapControlPanel';
 import { deepMerge } from 'src/utilities';
+import Link from "src/Link";
 
 import access from 'public/static/gis/access.geojson'
 import boundary from 'public/static/gis/boundary.geojson'
@@ -215,24 +216,28 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
     let headline = ""
     let props = feature.properties
 
+    const street_view = (url) => <Link href={url} target="_blank">Show Me</Link>
     switch (feature.layer.id) {
         case "existing_filters":
             headline = "Existing Filter"
 
             infoPairs = {
                 "Road": props.name,
+                "Street View": street_view(props.url)
             }
             break;
         case "new_filters":
             headline = "Proposed Filter"
             infoPairs = {
                 "Road": props.name,
+                "Street View": street_view(props.url)
             }
             break;
         case "one_way_filters":
             headline = "Proposed One-Way Filter"
             infoPairs = {
                 "Road": props.name,
+                "Street View": street_view(props.url)
             }
             break;
         case "access":
