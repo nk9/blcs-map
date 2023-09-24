@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BLCSMapControlPanel.module.scss";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Tooltip from "@mui/material/Tooltip";
 
 import {
     Accordion,
@@ -70,14 +71,22 @@ function ControlPanel({ layers, onChange }) {
             {isMobile ? shortTitle : title}
         </Typography>)
 
-    const legend_circle = (color, stroke_color, title, shortTitle) => (
-        <Typography variant="body1">
-            <span className={styles["circle-swatch"]} style={{
-                borderColor: stroke_color,
-                backgroundColor: color
-            }}></span>
-            {isMobile ? shortTitle : title}
-        </Typography>)
+    const legend_circle = (color, stroke_color, title, shortTitle) => (<div>
+        <span className={styles["circle-swatch"]} style={{
+            borderColor: stroke_color,
+            backgroundColor: color
+        }}></span>
+        <Typography variant="body1" sx={{ display: 'inline' }}>
+            {isMobile ?
+                (<Tooltip title={title} enterTouchDelay={0}>
+                    <span style={{ textDecoration: 'underline dashed' }}>
+                        {shortTitle}
+                    </span>
+                </Tooltip>) :
+                title
+            }
+        </Typography>
+    </div>)
 
     return (
         <div className={styles["control-panel"]}>
@@ -102,7 +111,7 @@ function ControlPanel({ layers, onChange }) {
                         <Typography variant="body1" mb={0} style={{ fontWeight: 'bold' }}>Legend</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        {legend_circle('white', 'red', 'Proposed Filter', 'New')}
+                        {legend_circle('white', 'red', 'Proposed Filter', 'Prop.')}
                         {legend_circle('#000', '#000', 'Existing Filter', 'Exist.')}
                         {legend_line('blue', 'Ward Boundaries', 'Wards')}
                         {legend_line('red', 'Phase 1', 'Phase 1', true)}
