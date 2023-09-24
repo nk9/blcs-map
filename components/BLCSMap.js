@@ -143,6 +143,22 @@ export default function BLCSMap() {
                 'filter': ['==', ['get', 'existing'], 1]
             }
         },
+        upgraded_filters: {
+            layer: filters,
+            interactive: true,
+            style: {
+                'id': 'upgraded_filters',
+                'type': 'circle',
+                'paint': {
+                    'circle-color': 'white',
+                    'circle-opacity': 1,
+                    'circle-stroke-width': 2,
+                    'circle-stroke-color': 'blue',
+                },
+                'layer-before': 'ward_names',
+                'filter': ['==', ['get', 'existing'], 2]
+            }
+        },
         new_filters: {
             layer: filters,
             interactive: true,
@@ -258,6 +274,14 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
     switch (feature.layer.id) {
         case "existing_filters":
             headline = "Existing Filter"
+
+            infoPairs = {
+                "Road": props.name,
+                "Street View": street_view(props.url)
+            }
+            break;
+        case "upgraded_filters":
+            headline = "Upgraded Filter"
 
             infoPairs = {
                 "Road": props.name,
