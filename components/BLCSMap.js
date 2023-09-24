@@ -81,7 +81,7 @@ export default function BLCSMap() {
                 'id': 'one_ways',
                 'type': 'line',
                 'paint': {
-                    'line-color': 'green',
+                    'line-color': '#01A938',
                     'line-opacity': 1,
                     'line-width': 2,
                     'line-dasharray': [3, 1],
@@ -291,6 +291,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
                 "Road": props.name,
                 "Street View": street_view(props.url)
             }
+            break;
         default: return
     }
 
