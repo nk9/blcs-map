@@ -164,12 +164,6 @@ export default function BLCSMap() {
         }
     };
 
-    const handleTouchMove = (event) => {
-        if (event.targetTouches.length > 1) {
-            setActiveFeature(null);
-        }
-    };
-
     const handleMouseEnter = (event) => {
         let canvas = event.originalEvent.target
         canvas.style.cursor = 'pointer'
@@ -210,7 +204,6 @@ export default function BLCSMap() {
             styleDiffing
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             onClick={handleClick}
-            onTouchMove={handleTouchMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             interactiveLayerIds={interactiveLayerIds}
