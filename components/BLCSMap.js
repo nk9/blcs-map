@@ -75,6 +75,18 @@ export default function BLCSMap() {
                 'layer-before': 'one_ways',
             },
         },
+        cells: {
+            layer: cells,
+            interactive: true,
+            style: {
+                'id': 'cells',
+                'type': 'fill',
+                'paint': {
+                    'fill-color': ['match', ['get', 'traffshed'], ...cellColors, '#AAAAAA'],
+                    'fill-opacity': 0.15
+                }
+            } 
+        },
         one_ways: {
             layer: one_ways,
             interactive: false,
@@ -112,18 +124,6 @@ export default function BLCSMap() {
                     'icon-rotate': ['get', 'rotation'],
                     'icon-size': 0.8,
                     'icon-allow-overlap': true,
-                }
-            } 
-        },
-        cells: {
-            layer: cells,
-            interactive: true,
-            style: {
-                'id': 'cells',
-                'type': 'fill',
-                'paint': {
-                    'fill-color': ['match', ['get', 'traffshed'], ...cellColors, '#AAAAAA'],
-                    'fill-opacity': 0.15
                 }
             } 
         },

@@ -3,7 +3,6 @@
 "name": "filters",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "id": 37, "name": "Gainford St", "existing": 2, "url": "https://maps.app.goo.gl/KJDEToCnX4ApDMoJA", "notes": "Changes proposed to allow easy access by mobility scooters and adapted cycles." }, "geometry": { "type": "Point", "coordinates": [ -0.111415519636768, 51.538388004720602 ] } },
 { "type": "Feature", "properties": { "id": 1, "name": "Cloudesley Rd", "existing": 1, "url": "https://maps.app.goo.gl/cEhGMUtpKsS9DpAA9", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.108957671479431, 51.53438208439011 ] } },
 { "type": "Feature", "properties": { "id": 2, "name": "College Cross", "existing": 1, "url": "https://maps.app.goo.gl/cNQpNFV58svWpJsA9", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.106170346592616, 51.541602620695997 ] } },
 { "type": "Feature", "properties": { "id": 3, "name": "Cloudesley Pl", "existing": 1, "url": "https://maps.app.goo.gl/ADK7rHF674Ws1uy57", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.109432337675811, 51.535395788243775 ] } },
@@ -38,7 +37,8 @@
 { "type": "Feature", "properties": { "id": 32, "name": "Sheringham Rd", "existing": 0, "url": "https://maps.app.goo.gl/jiofN8Rxzibn8xzK8", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.111804651193078, 51.547297906942106 ] } },
 { "type": "Feature", "properties": { "id": 33, "name": "Westbourne Rd", "existing": 0, "url": "https://maps.app.goo.gl/5MvMgXcCvMqUw9Bi6", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.112011730233129, 51.545846228101304 ] } },
 { "type": "Feature", "properties": { "id": 34, "name": "Roman Way", "existing": 0, "url": "https://maps.app.goo.gl/8D7g7BpVFq2dSFDQ6", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.114082520633638, 51.54449206657516 ] } },
-{ "type": "Feature", "properties": { "id": 35, "name": "Morgan Rd", "existing": 3, "url": "https://maps.app.goo.gl/25XVdTjkRa4MHVPA8", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.10967544020278, 51.550004790606089 ] } },
-{ "type": "Feature", "properties": { "id": 36, "name": "Bromfield St", "existing": 1, "url": "https://maps.app.goo.gl/ePBarmcngRzBNBQJ8", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.105690299808694, 51.534983829041138 ] } }
+{ "type": "Feature", "properties": { "id": 35, "name": "Morgan Rd", "existing": 3, "url": "https://maps.app.goo.gl/25XVdTjkRa4MHVPA8", "notes": "No entry from Palmer Pl into Morgan Road. Also, no right turn from Morgan Rd into Palmer Pl." }, "geometry": { "type": "Point", "coordinates": [ -0.10967544020278, 51.550004790606089 ] } },
+{ "type": "Feature", "properties": { "id": 36, "name": "Bromfield St", "existing": 1, "url": "https://maps.app.goo.gl/ePBarmcngRzBNBQJ8", "notes": null }, "geometry": { "type": "Point", "coordinates": [ -0.105690299808694, 51.534983829041138 ] } },
+{ "type": "Feature", "properties": { "id": 37, "name": "Gainford St", "existing": 2, "url": "https://maps.app.goo.gl/KJDEToCnX4ApDMoJA", "notes": "Changes proposed to allow easy access by mobility scooters and adapted cycles." }, "geometry": { "type": "Point", "coordinates": [ -0.111415519636768, 51.538388004720602 ] } }
 ]
 }
