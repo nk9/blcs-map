@@ -117,7 +117,7 @@ export default function BLCSMap() {
         },
         cells: {
             layer: cells,
-            interactive: false,
+            interactive: true,
             style: {
                 'id': 'cells',
                 'type': 'fill',
@@ -272,6 +272,14 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
     </>)
 
     switch (feature.layer.id) {
+        case "cells":
+            headline = "Motor Traffic Sub-Area"
+
+            infoPairs = {
+                "Access via": props.access,
+            }
+
+            break;
         case "existing_filters":
             headline = "Existing Filter"
 
