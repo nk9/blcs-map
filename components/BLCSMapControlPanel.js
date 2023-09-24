@@ -17,7 +17,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
         boxShadow: 'none',
         border: `0`,
         '.MuiAccordionDetails-root': { padding: 0 },
-        '.MuiAccordionSummary-root': { padding: 0, minHeight: "2rem" },
+        '.MuiAccordionSummary-root': { padding: 0, minHeight: "2rem", marginTop: "4px" },
         '.MuiAccordionSummary-content': { margin: 0 },
     };
 });
