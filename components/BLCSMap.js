@@ -80,7 +80,7 @@ export default function BLCSMap() {
                     'icon-image': 'double-arrow-36',
                     'icon-rotate': ['get', 'rotation'],
                     'icon-size': 0.8,
-                    "icon-allow-overlap": true
+                    'icon-allow-overlap': true,
                 }
             } 
         },
@@ -262,6 +262,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
             latitude={hoverInfo.latitude}
             closeButton={true}
             onClose={handleClosePopup}
+            key={`${feature.layer.id}-${feature.properties.id}`}
         >
             <h3 className={styles.headline}>{headline}</h3>
             <div className={styles.container}>
