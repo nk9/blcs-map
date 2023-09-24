@@ -8,6 +8,8 @@ import ControlPanel from './BLCSMapControlPanel';
 import { deepMerge } from 'src/utilities';
 import Link from "src/Link";
 
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
 import access from 'public/static/gis/access.geojson'
 import boundary from 'public/static/gis/boundary.geojson'
 import cells from 'public/static/gis/cells.geojson'
@@ -227,7 +229,11 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
     let headline = ""
     let props = feature.properties
 
-    const street_view = (url) => <Link href={url} target="_blank">Show Me</Link>
+    const street_view = (url) => (<>
+        <Link href={url} target="_blank">Show Me</Link>&nbsp;
+        <OpenInNewIcon sx={{ fontSize: 12 }} />
+    </>)
+
     switch (feature.layer.id) {
         case "existing_filters":
             headline = "Existing Filter"
@@ -255,6 +261,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
             headline = "Access Point"
             infoPairs = {
                 "Road": props.street,
+                "Street View": street_view(props.url)
             }
             break;
         default: return
