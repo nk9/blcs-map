@@ -138,7 +138,7 @@ function ControlPanel({ layers, onChange }) {
                         {legend_line('blue', 'Ward Boundaries', 'Wards')}
                         {legend_line('red', 'Phase 1', 'Phase 1', true)}
                         {legend_line('#01A938', '1-way Changes', '1-ways', true)}
-                        {legend_half_square('rgba(185, 80, 233, 0.35)', 'rgba(254, 148, 0, 0.35)', 'Sub-areas', 'Sub-A.', 'A sub-area is a network of streets all reachable by motor vehicle without using a boundary road.')}
+                        {legend_half_square('rgba(185, 80, 233, 0.35)', 'rgba(254, 148, 0, 0.35)', 'Sub-areas', 'Areas', 'A sub-area is a network of streets all reachable by motor vehicle without using a boundary road.')}
                     </AccordionDetails>
                 </CustomAccordion>
             </div>

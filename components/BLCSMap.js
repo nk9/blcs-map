@@ -240,9 +240,9 @@ export default function BLCSMap() {
     return (
         <Map
             initialViewState={{
-                longitude: -0.109,
+                longitude: -0.11,
                 latitude: 51.542,
-                zoom: 14
+                zoom: 13.8
             }}
             style={{ width: "100%", height: 700 }}
             mapStyle="mapbox://styles/nkocharh/clmt1bsj702f201qx1mvtdqoh"
