@@ -110,6 +110,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
         "Street View": street_view(props.url),
         "More Info": lbi_link(feature.layer.metadata["blcs:layer_group"])
     })
+
     switch (feature.layer.id) {
         case "cells":
             headline = "Motor Traffic Sub-Area"
@@ -160,7 +161,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
             infoPairs = defaultInfo()
             break;
 
-        case "cycle_routes":
+        case "cycle_routes_clickable":
             headline = "Cycle Route"
             infoPairs = defaultInfo()
             break;

@@ -17,22 +17,6 @@ const cellColors = [
     6, '#2d921e'] // green   Upper St
 
 const layers = {
-    boundary_phase1: {
-        layer: boundary,
-        interactive: false,
-        style: {
-            'id': 'boundary_phase1',
-            'type': 'line',
-            'paint': {
-                'line-color': 'red',
-                'line-opacity': 1,
-                'line-width': 2,
-                'line-dasharray': [5, 2],
-            },
-            'layer-before': 'ward_boundaries',
-            'filter': ['==', ['get', 'phase'], 1]
-        }
-    },
     ward_boundaries: {
         layer: wards,
         interactive: false,
@@ -63,8 +47,22 @@ const layers = {
                 'text-size': 20,
                 'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
             },
-            'layer-before': 'one_ways',
         },
+    },
+    boundary_phase1: {
+        layer: boundary,
+        interactive: false,
+        style: {
+            'id': 'boundary_phase1',
+            'type': 'line',
+            'paint': {
+                'line-color': 'red',
+                'line-opacity': 1,
+                'line-width': 2,
+                'line-dasharray': [5, 2],
+            },
+            'filter': ['==', ['get', 'phase'], 1]
+        }
     },
     cells: {
         layer: cells,
@@ -110,6 +108,64 @@ const layers = {
             },
         }
     },
+    main_roads: {
+        layer: main_roads,
+        interactive: true,
+        default_visibility: false,
+        group: "through_roads",
+        style: {
+            'id': 'main_roads',
+            'type': 'line',
+            'paint': {
+                'line-width': 15,
+                'line-color': 'green',
+                'line-dasharray': [.5, .25],
+            },
+        }
+    },
+    parades: {
+        layer: parades,
+        interactive: true,
+        default_visibility: false,
+        group: "shop_parades",
+        style: {
+            'id': 'parades',
+            'type': 'line',
+            'paint': {
+                'line-width': 15,
+                'line-color': 'orange',
+                'line-dasharray': [.5, .25],
+            },
+        }
+    },
+    cycle_routes: {
+        layer: cycle_routes,
+        interactive: false,
+        default_visibility: false,
+        group: "safe_routes",
+        style: {
+            'id': 'cycle_routes',
+            'type': 'line',
+            'paint': {
+                'line-width': 2,
+                'line-color': 'purple',
+            },
+        }
+    },
+    cycle_routes_clickable: {
+        layer: cycle_routes,
+        interactive: true,
+        default_visibility: false,
+        group: "safe_routes",
+        style: {
+            'id': 'cycle_routes_clickable',
+            'type': 'line',
+            'paint': {
+                'line-width': 15,
+                'line-opacity': 0
+            },
+        }
+    },
     access: {
         layer: access,
         interactive: true,
@@ -140,26 +196,7 @@ const layers = {
                 'circle-stroke-width': 2,
                 'circle-stroke-color': 'black',
             },
-            'layer-before': 'ward_names',
             'filter': ['in', ['get', 'existing'], ["literal", [1, 2]]]
-        }
-    },
-    upgraded_filters: {
-        layer: filters,
-        interactive: true,
-        default_visibility: false,
-        group: "safe_routes",
-        style: {
-            'id': 'upgraded_filters',
-            'type': 'circle',
-            'paint': {
-                'circle-color': 'white',
-                'circle-opacity': 1,
-                'circle-stroke-width': 2,
-                'circle-stroke-color': 'blue',
-            },
-            'layer-before': 'cycle_routes',
-            'filter': ['==', ['get', 'existing'], 2]
         }
     },
     new_filters: {
@@ -176,7 +213,6 @@ const layers = {
                 'circle-stroke-width': 2,
                 'circle-stroke-color': 'red',
             },
-            'layer-before': 'ward_names',
             'filter': ['==', ['get', 'existing'], 0]
         }
     },
@@ -191,54 +227,24 @@ const layers = {
             'layout': {
                 'icon-image': 'road-closure'
             },
-            'layer-before': 'ward_names',
             'filter': ['==', ['get', 'existing'], 3]
         }
     },
-    parades: {
-        layer: parades,
-        interactive: true,
-        default_visibility: false,
-        group: "shop_parades",
-        style: {
-            'id': 'parades',
-            'type': 'line',
-            'paint': {
-                'line-width': 15,
-                'line-color': 'orange',
-                'line-dasharray': [.5, .25],
-            },
-        }
-    },
-    main_roads: {
-        layer: main_roads,
-        interactive: true,
-        default_visibility: false,
-        group: "through_roads",
-        style: {
-            'id': 'main_roads',
-            'type': 'line',
-            'paint': {
-                'line-width': 15,
-                'line-color': 'green',
-                'line-dasharray': [.5, .25],
-            },
-            'layer-before': 'ward_names',
-        }
-    },
-    cycle_routes: {
-        layer: cycle_routes,
+    upgraded_filters: {
+        layer: filters,
         interactive: true,
         default_visibility: false,
         group: "safe_routes",
         style: {
-            'id': 'cycle_routes',
-            'type': 'line',
+            'id': 'upgraded_filters',
+            'type': 'circle',
             'paint': {
-                'line-width': 2,
-                'line-color': 'purple',
+                'circle-color': 'white',
+                'circle-opacity': 1,
+                'circle-stroke-width': 2,
+                'circle-stroke-color': 'blue',
             },
-            'layer-before': 'existing_filters',
+            'filter': ['==', ['get', 'existing'], 2],
         }
     },
 
