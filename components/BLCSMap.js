@@ -19,19 +19,19 @@ import wards from 'public/static/gis/islington-ward-boundaries.geojson'
 
 export default function BLCSMap() {
     const cellColors = [
-        1, '#b950e9',
-        2, '#fcf006',
-        3, '#e735c9',
-        4, '#1a41ed',
-        5, '#fe9400',
-        6, '#2d921e']
+        1, '#b950e9', // purple  Tolpuddle Triangle
+        2, '#fcf006', // yellow  Thornhill Sq
+        3, '#e735c9', // pink    HMS Pentonville
+        4, '#1a41ed', // blue    Paradise Park
+        5, '#fe9400', // orange  Liverpool Rd
+        6, '#2d921e'] // green   Upper St
 
     const layers = {
-        boundary: {
+        boundary_phase1: {
             layer: boundary,
             interactive: false,
             style: {
-                'id': 'boundary',
+                'id': 'boundary_phase1',
                 'type': 'line',
                 'paint': {
                     'line-color': 'red',
@@ -40,6 +40,7 @@ export default function BLCSMap() {
                     'line-dasharray': [5, 2],
                 },
                 'layer-before': 'ward_boundaries',
+                'filter': ['==', ['get', 'phase'], 1]
             }
         },
         ward_boundaries: {
