@@ -13,12 +13,6 @@ export default function Index() {
         <title>Phase 1 — Barnsbury & Laycock</title>
       </Head>
       <Container maxWidth="md">
-        <Typography variant='h4'>
-          Barnsbury & Laycock Liveable Neighbourhood
-        </Typography>
-        <Typography variant='body1'>
-          Council proposals. Learn more on <Link href="https://www.letstalk.islington.gov.uk/barnsbury-laycock-liveable-neighbourhood">their website</Link>.
-        </Typography>
         <Box mt={3} xs={12} mb={3}>
           <BLCSMap />
         </Box>
