@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useReducer } from "react";
 
 import Map, { Popup, Source, Layer, ScaleControl } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -192,10 +192,10 @@ export default function BLCSMap() {
         },
     }
 
-    const [layersVisibility, setLayersVisibility] = React.useReducer((state, updates) => ({ ...state, ...updates }),
+    const [layersVisibility, setLayersVisibility] = useReducer((state, updates) => ({ ...state, ...updates }),
         {});
-    const [hoverInfo, setHoverInfo] = React.useState(null);
-    const [activeFeature, setActiveFeature] = React.useState(null);
+    const [hoverInfo, setHoverInfo] = useState(null);
+    const [activeFeature, setActiveFeature] = useState(null);
 
     const handleClick = (event) => {
         console.log("clicked", event.features)
