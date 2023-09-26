@@ -66,7 +66,7 @@ export default function BLCSMap() {
                 zoom: 13.8
             }}
             style={{ width: "100%", height: 700 }}
-            mapStyle="mapbox://styles/nkocharh/clmt1bsj702f201qx1mvtdqoh"
+            mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
             styleDiffing
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             onClick={handleClick}
@@ -140,7 +140,6 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
             }
             break;
         case "one_ways_clickable":
-            console.log("one_ways_clickable??", props)
             headline = "Changed One-Way Rules"
             infoPairs = {
                 "Road": props.name,
