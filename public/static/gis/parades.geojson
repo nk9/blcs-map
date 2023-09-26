@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "parades",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 3, "name": "Westbourne Rd", "url": "https://maps.app.goo.gl/uKFqt4gt2cdMsUwT6", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.112147613704391, 51.546013851509549 ], [ -0.111829273961296, 51.545649035550277 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 4, "name": "Offord Rd", "url": "https://maps.app.goo.gl/dtKtFf3XFuuqLMKaA", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.113473989257885, 51.543562306755931 ], [ -0.113267769172736, 51.543194980785181 ], [ -0.112943423019394, 51.54326720104072 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 5, "name": "Liverpool Rd", "url": "https://maps.app.goo.gl/9D1F64zeP5u4XtXN6", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.106310829321005, 51.540298374305465 ], [ -0.106816226315794, 51.538896925762408 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 6, "name": "Theberton St", "url": "https://maps.app.goo.gl/cb7FfUGg11iD7pyS9", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.103621081175842, 51.537538025813525 ], [ -0.102928756525446, 51.537539948256139 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 1, "name": "MacKenzie Rd", "url": "https://maps.app.goo.gl/EXzrJfb478AzGu9L7", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.11395401230433, 51.548570663660286 ], [ -0.114653869044638, 51.548231992535534 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 2, "name": "Roman Way", "url": "https://maps.app.goo.gl/ayyECKrKnSmYMYV37", "notes": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ -0.116087845030142, 51.546898677405885 ], [ -0.11571076259483, 51.546558745361402 ] ] ] } }
+]
+}

@@ -3,6 +3,9 @@ import one_ways from 'public/static/gis/one_ways.geojson'
 import boundary from 'public/static/gis/boundary.geojson'
 import cells from 'public/static/gis/cells.geojson'
 import filters from 'public/static/gis/filters.geojson'
+import parades from 'public/static/gis/parades.geojson'
+import main_roads from 'public/static/gis/main-roads.geojson'
+import cycle_routes from 'public/static/gis/cycle-routes.geojson'
 import wards from 'public/static/gis/islington-ward-boundaries.geojson'
 
 const cellColors = [
@@ -67,6 +70,7 @@ const layers = {
         layer: cells,
         interactive: true,
         default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'cells',
             'type': 'fill',
@@ -79,6 +83,8 @@ const layers = {
     one_ways: {
         layer: one_ways,
         interactive: false,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'one_ways',
             'type': 'line',
@@ -93,6 +99,8 @@ const layers = {
     one_ways_clickable: {
         layer: one_ways,
         interactive: true,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'one_ways_clickable',
             'type': 'line',
@@ -105,6 +113,8 @@ const layers = {
     access: {
         layer: access,
         interactive: true,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'access',
             'type': 'symbol',
@@ -119,6 +129,8 @@ const layers = {
     existing_filters: {
         layer: filters,
         interactive: true,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'existing_filters',
             'type': 'circle',
@@ -129,12 +141,14 @@ const layers = {
                 'circle-stroke-color': 'black',
             },
             'layer-before': 'ward_names',
-            'filter': ['==', ['get', 'existing'], 1]
+            'filter': ['in', ['get', 'existing'], ["literal", [1, 2]]]
         }
     },
     upgraded_filters: {
         layer: filters,
         interactive: true,
+        default_visibility: false,
+        group: "safe_routes",
         style: {
             'id': 'upgraded_filters',
             'type': 'circle',
@@ -144,13 +158,15 @@ const layers = {
                 'circle-stroke-width': 2,
                 'circle-stroke-color': 'blue',
             },
-            'layer-before': 'ward_names',
+            'layer-before': 'cycle_routes',
             'filter': ['==', ['get', 'existing'], 2]
         }
     },
     new_filters: {
         layer: filters,
         interactive: true,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'new_filters',
             'type': 'circle',
@@ -167,6 +183,8 @@ const layers = {
     one_way_filters: {
         layer: filters,
         interactive: true,
+        default_visibility: false,
+        group: "traffic_filters",
         style: {
             'id': 'one_way_filters',
             'type': 'symbol',
@@ -177,6 +195,53 @@ const layers = {
             'filter': ['==', ['get', 'existing'], 3]
         }
     },
+    parades: {
+        layer: parades,
+        interactive: true,
+        default_visibility: false,
+        group: "shop_parades",
+        style: {
+            'id': 'parades',
+            'type': 'line',
+            'paint': {
+                'line-width': 15,
+                'line-color': 'orange',
+                'line-dasharray': [.5, .25],
+            },
+        }
+    },
+    main_roads: {
+        layer: main_roads,
+        interactive: true,
+        default_visibility: false,
+        group: "through_roads",
+        style: {
+            'id': 'main_roads',
+            'type': 'line',
+            'paint': {
+                'line-width': 15,
+                'line-color': 'green',
+                'line-dasharray': [.5, .25],
+            },
+            'layer-before': 'ward_names',
+        }
+    },
+    cycle_routes: {
+        layer: cycle_routes,
+        interactive: true,
+        default_visibility: false,
+        group: "safe_routes",
+        style: {
+            'id': 'cycle_routes',
+            'type': 'line',
+            'paint': {
+                'line-width': 2,
+                'line-color': 'purple',
+            },
+            'layer-before': 'existing_filters',
+        }
+    },
+
 }
 
 export default layers

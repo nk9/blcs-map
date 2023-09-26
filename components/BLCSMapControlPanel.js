@@ -23,8 +23,10 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 });
 
 const hideableLayers = {
-    'cells': { fullName: "Sub-Areas", shortName: "Areas" },
-    'existing_filters': { fullName: "Traffic filters", shortName: "Filters" },
+    'parades': { fullName: "1. Shop parades", shortName: "Parades" },
+    'cycle_routes': { fullName: "2. Safe routes", shortName: "routes" },
+    'existing_filters': { fullName: "3. Traffic filters", shortName: "Filters" },
+    'main_roads': { fullName: "4. Through roads", shortName: "Thru" },
     'ward_boundaries': { fullName: "Ward Boundaries", shortName: "Wards" },
 }
 
@@ -32,7 +34,8 @@ const hideableLayers = {
 // toggle this other layer
 const pairedLayers = {
     'ward_boundaries': ['ward_names'],
-    'existing_filters': ['upgraded_filters', 'new_filters', 'one_way_filters'],
+    'existing_filters': ['cells', 'new_filters', 'one_way_filters', 'access', 'one_ways', 'one_ways_clickable'],
+    'cycle_routes': ['upgraded_filters'],
 }
 
 function ControlPanel({ layers, onChange }) {
