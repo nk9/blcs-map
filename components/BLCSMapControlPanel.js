@@ -23,13 +23,16 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 });
 
 const hideableLayers = {
+    'cells': { fullName: "Sub-Areas", shortName: "Areas" },
+    'existing_filters': { fullName: "Traffic filters", shortName: "Filters" },
     'ward_boundaries': { fullName: "Ward Boundaries", shortName: "Wards" },
 }
 
 // When the hideable layer above has its visibility toggled, also
 // toggle this other layer
 const pairedLayers = {
-    'ward_boundaries': 'ward_names'
+    'ward_boundaries': ['ward_names'],
+    'existing_filters': ['upgraded_filters', 'new_filters', 'one_way_filters'],
 }
 
 function ControlPanel({ layers, onChange }) {
@@ -51,7 +54,9 @@ function ControlPanel({ layers, onChange }) {
         var newVisibility = { ...visibility, [name]: value }
 
         if (Object.hasOwn(pairedLayers, name)) {
-            newVisibility[pairedLayers[name]] = value
+            for (const layerID of pairedLayers[name]) {
+                newVisibility[layerID] = value
+            }
         }
 
         setVisibility(newVisibility);

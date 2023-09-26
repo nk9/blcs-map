@@ -79,6 +79,7 @@ export default function BLCSMap() {
         cells: {
             layer: cells,
             interactive: true,
+            default_visibility: false,
             style: {
                 'id': 'cells',
                 'type': 'fill',
