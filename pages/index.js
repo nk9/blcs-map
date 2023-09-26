@@ -12,10 +12,11 @@ export default function Index() {
       <Head>
         <title>Phase 1 — Barnsbury & Laycock</title>
       </Head>
-      <Container maxWidth="md">
-        <Box mt={3} xs={12} mb={3}>
+      <Container maxWidth="md" disableGutters={true}>
+        <Box xs={12}>
           <BLCSMap />
         </Box>
-      </Container></>
+      </Container>
+    </>
   );
 }
