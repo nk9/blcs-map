@@ -36,11 +36,12 @@ const pairedLayers = {
 }
 
 function ControlPanel({ layers, onChange }) {
-    let defaultVisibility = Object.fromEntries(Object.entries(layers).map(
+    const [visibility, setVisibility] = useState(() => {
         // Apply default_visibility property, with default of visible
-        ([key, info]) => [key, (info.default_visibility ?? true)])
-    )
-    const [visibility, setVisibility] = useState(defaultVisibility);
+        return Object.fromEntries(Object.entries(layers).map(
+            ([key, info]) => [key, (info.default_visibility ?? true)])
+        )
+    });
 
     useEffect(() => {
         // Convert true/false to "visible"/"none"
