@@ -16,6 +16,7 @@ export default function BLCSMap() {
         {});
     const [hoverInfo, setHoverInfo] = useState(null);
     const [activeFeature, setActiveFeature] = useState(null);
+    const [mapStyle, setMapStyle] = useState(process.env.NEXT_PUBLIC_MAPBOX_STYLE);
 
     const handleClick = (event) => {
         if (event.features.length > 0) {
@@ -66,7 +67,7 @@ export default function BLCSMap() {
                 zoom: 13.8
             }}
             style={{ width: "100%", height: 700 }}
-            mapStyle={process.env.NEXT_PUBLIC_MAPBOX_STYLE}
+            mapStyle={mapStyle}
             styleDiffing
             mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
             onClick={handleClick}
@@ -78,7 +79,12 @@ export default function BLCSMap() {
             {activeFeature && preparePopup(hoverInfo, activeFeature, styles, setActiveFeature)}
 
             <ScaleControl />
-            <ControlPanel layers={layers} onChange={setLayersVisibility} />
+            <ControlPanel
+                layers={layers}
+                setLayersVisibility={setLayersVisibility}
+                mapStyle={mapStyle}
+                setMapStyle={setMapStyle}
+            />
         </Map>
     )
 }

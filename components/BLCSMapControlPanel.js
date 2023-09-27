@@ -1,7 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import styles from "./BLCSMapControlPanel.module.scss";
-import useMediaQuery from '@mui/material/useMediaQuery';
+
 import Tooltip from "@mui/material/Tooltip";
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 import {
     Accordion,
@@ -9,8 +11,13 @@ import {
     AccordionSummary,
     Typography,
 } from "@mui/material";
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SatelliteAltIcon from '@mui/icons-material/SatelliteAlt';
+import MapIcon from '@mui/icons-material/Map';
+
 import { styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const CustomAccordion = styled(Accordion)(({ theme }) => {
     return {
@@ -38,20 +45,21 @@ const pairedLayers = {
     'cycle_routes': ['upgraded_filters', 'cycle_routes_clickable'],
 }
 
-function ControlPanel({ layers, onChange }) {
+function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
     const [visibility, setVisibility] = useState(() => {
         // Apply default_visibility property, with default of visible
         return Object.fromEntries(Object.entries(layers).map(
             ([key, info]) => [key, (info.default_visibility ?? true)])
         )
     });
+    // const [mapBackground, setMapBackground] = useState(process.env.NEXT_PUBLIC_MAPBOX_STYLE)
 
     useEffect(() => {
         // Convert true/false to "visible"/"none"
         const visibilityState = Object.fromEntries(
             Object.entries(visibility).map(([k, v]) => [k, v ? "visible" : "none"])
         );
-        onChange(visibilityState);
+        setLayersVisibility(visibilityState);
     }, [visibility]);
 
     const onVisibilityChange = (name, value) => {
@@ -65,6 +73,14 @@ function ControlPanel({ layers, onChange }) {
 
         setVisibility(newVisibility);
     };
+
+    const handleMapStyleChange = (event, newStyle) => {
+        setMapStyle(newStyle)
+    }
+
+    // useEffect(() => {
+    //     setMapStyle(mapBackground)
+    // }, [mapBackground])
     
     const isMobile = useMediaQuery('(max-width: 700px)');
     const underlineStyle = {
@@ -126,7 +142,7 @@ function ControlPanel({ layers, onChange }) {
         if (visibility["parades"]) {
             items.push(legend_line('orange', 'Shop Parades', 'Shops', true))
         }
-        if (visibility["parades"]) {
+        if (visibility["cycle_routes"]) {
             items.push(legend_line('purple', 'Cycle Routes', 'Cycles'))
         }
         if (visibility["upgraded_filters"]) {
@@ -161,6 +177,34 @@ function ControlPanel({ layers, onChange }) {
 
     return (
         <div className={styles["control-panel"]}>
+            <div className={styles["toggle-buttons"]}>
+                <ToggleButtonGroup
+                    size="small"
+                    value={mapStyle}
+                    onChange={handleMapStyleChange}
+                    exclusive={true}
+                >
+                    <ToggleButton value={process.env.NEXT_PUBLIC_MAPBOX_STYLE} aria-label="map" key="map">
+                        <MapIcon style={{ fontSize: "14px" }} />
+                    </ToggleButton>
+                    <ToggleButton value={process.env.NEXT_PUBLIC_MAPBOX_SATELLITE_STYLE} aria-label="satellite" key="satellite">
+                        <SatelliteAltIcon style={{ fontSize: "14px" }} />
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            </div>
+            {/*            <input
+                id="map"
+                type="radio"
+                onChange={evt => console.log(evt)}
+            />
+            <label htmlFor={map}><MapIcon style={{ fontSize: "14px" }} /></label>
+            <input
+                id="satellite"
+                type="radio"
+                onChange={evt => console.log(evt)}
+            />
+            <label htmlFor={satellite}><SatelliteAltIcon style={{ fontSize: "14px" }} /></label>
+*/}
             <Typography variant="body1" style={{ fontWeight: 'bold' }}>Layers</Typography>
             {Object.entries(hideableLayers).map(([layerID, { fullName, shortName }]) => (
                 <div key={layerID} className="input">
