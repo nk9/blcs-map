@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import styles from "./BLCSMapControlPanel.module.scss";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Tooltip from "@mui/material/Tooltip";
@@ -66,7 +66,7 @@ function ControlPanel({ layers, onChange }) {
         setVisibility(newVisibility);
     };
     
-    const isMobile = useMediaQuery('(max-width: 768px)');
+    const isMobile = useMediaQuery('(max-width: 700px)');
     const underlineStyle = {
         textDecoration: 'underline dashed',
         WebkitTextDecorationLine: 'underline',
@@ -74,7 +74,7 @@ function ControlPanel({ layers, onChange }) {
     }
 
     const legend_line = (color, title, shortTitle, isDashed = false) => (
-        <Typography variant="body1">
+        <Typography variant="body1" key={title}>
             <span className={styles["swatch"]} style={{
                 borderColor: color,
                 borderStyle: isDashed ? "dashed" : "solid"
@@ -82,7 +82,7 @@ function ControlPanel({ layers, onChange }) {
             {isMobile ? shortTitle : title}
         </Typography>)
 
-    const legend_circle = (color, stroke_color, title, shortTitle) => (<div>
+    const legend_circle = (color, stroke_color, title, shortTitle) => (<div key={title}>
         <span className={styles["circle-swatch"]} style={{
             borderColor: stroke_color,
             backgroundColor: color
@@ -100,7 +100,7 @@ function ControlPanel({ layers, onChange }) {
     </div>)
 
     const legend_half_square = (color1, color2, title, shortTitle, tooltip) => (
-        <>
+        <Fragment key={title}>
             <span className={styles["half-square-swatch"]} style={{
                 borderTopColor: color1,
                 borderLeftColor: color1,
@@ -114,9 +114,50 @@ function ControlPanel({ layers, onChange }) {
                     </span>
                 </Tooltip>
             </Typography>
-
-        </>
+        </Fragment>
     )
+
+    const build_legend = () => {
+        var items = []
+
+        if (visibility["ward_boundaries"]) {
+            items.push(legend_line('blue', 'Ward Boundaries', 'Wards'))
+        }
+        if (visibility["parades"]) {
+            items.push(legend_line('orange', 'Shop Parades', 'Shops', true))
+        }
+        if (visibility["parades"]) {
+            items.push(legend_line('purple', 'Cycle Routes', 'Cycles'))
+        }
+        if (visibility["upgraded_filters"]) {
+            items.push(legend_circle('white', 'blue', 'Upgraded Filter', 'Upgr.'))
+        }
+        if (visibility["new_filters"]) {
+            items.push(legend_circle('white', 'red', 'Proposed Filter', 'Prop.'))
+        }
+        if (visibility["existing_filters"]) {
+            items.push(legend_circle('#000', '#000', 'Existing Filter', 'Exist.'))
+        }
+        if (visibility["one_ways"]) {
+            items.push(legend_line('#01A938', '1-way Changes', '1-ways', true))
+        }
+        if (visibility["cells"]) {
+            items.push(legend_half_square(
+                'rgba(185, 80, 233, 0.35)',
+                'rgba(254, 148, 0, 0.35)',
+                'Sub-areas',
+                'Areas',
+                'A sub-area is a network of streets all reachable by motor vehicle without using a boundary road.')
+            )
+        }
+        if (visibility["main_roads"]) {
+            items.push(legend_line('green', 'Improved Roads', 'Improve', true))
+        }
+
+        items.push(legend_line('red', 'Phase 1', 'Phase 1', true))
+
+        return items
+    }
 
     return (
         <div className={styles["control-panel"]}>
@@ -141,13 +182,7 @@ function ControlPanel({ layers, onChange }) {
                         <Typography variant="body1" mb={0} style={{ fontWeight: 'bold' }}>Legend</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        {legend_circle('white', 'red', 'Proposed Filter', 'Prop.')}
-                        {legend_circle('white', 'blue', 'Upgraded Filter', 'Upgr.')}
-                        {legend_circle('#000', '#000', 'Existing Filter', 'Exist.')}
-                        {legend_line('blue', 'Ward Boundaries', 'Wards')}
-                        {legend_line('red', 'Phase 1', 'Phase 1', true)}
-                        {legend_line('#01A938', '1-way Changes', '1-ways', true)}
-                        {legend_half_square('rgba(185, 80, 233, 0.35)', 'rgba(254, 148, 0, 0.35)', 'Sub-areas', 'Areas', 'A sub-area is a network of streets all reachable by motor vehicle without using a boundary road.')}
+                        {build_legend()}
                     </AccordionDetails>
                 </CustomAccordion>
             </div>
