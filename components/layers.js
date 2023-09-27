@@ -20,7 +20,7 @@ const layers = {
     ward_boundaries: {
         layer: wards,
         interactive: false,
-        default_visibility: false,
+        default_visibility: true,
         style: {
             'id': 'ward_boundaries',
             'type': 'line',
@@ -34,7 +34,7 @@ const layers = {
     ward_names: {
         layer: wards,
         interactive: false,
-        default_visibility: false,
+        default_visibility: true,
         style: {
             'id': 'ward_text',
             'type': 'symbol',
@@ -126,7 +126,7 @@ const layers = {
     parades: {
         layer: parades,
         interactive: true,
-        default_visibility: false,
+        default_visibility: true,
         group: "shop_parades",
         style: {
             'id': 'parades',
