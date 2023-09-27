@@ -192,31 +192,30 @@ function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
                     </ToggleButton>
                 </ToggleButtonGroup>
             </div>
-            {/*            <input
-                id="map"
-                type="radio"
-                onChange={evt => console.log(evt)}
-            />
-            <label htmlFor={map}><MapIcon style={{ fontSize: "14px" }} /></label>
-            <input
-                id="satellite"
-                type="radio"
-                onChange={evt => console.log(evt)}
-            />
-            <label htmlFor={satellite}><SatelliteAltIcon style={{ fontSize: "14px" }} /></label>
-*/}
-            <Typography variant="body1" style={{ fontWeight: 'bold' }}>Layers</Typography>
-            {Object.entries(hideableLayers).map(([layerID, { fullName, shortName }]) => (
-                <div key={layerID} className="input">
-                    <input
-                        id={layerID}
-                        type="checkbox"
-                        checked={visibility[layerID]}
-                        onChange={evt => onVisibilityChange(layerID, evt.target.checked)}
-                    />
-                    <label htmlFor={layerID}>{isMobile ? shortName : fullName}</label>
-                </div>
-            ))}
+            <div> {/*Remove top line*/}
+                <CustomAccordion disableGutters defaultExpanded>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        sx={{ flexDirection: "row-reverse" }}
+                    >
+                        <Typography variant="body1" mb={0} style={{ fontWeight: 'bold' }}>Layers</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        {Object.entries(hideableLayers).map(([layerID, { fullName, shortName }]) => (
+                            <div key={layerID} className="input">
+                                <input
+                                    id={layerID}
+                                    type="checkbox"
+                                    checked={visibility[layerID]}
+                                    onChange={evt => onVisibilityChange(layerID, evt.target.checked)}
+                                />
+                                <label htmlFor={layerID}>{isMobile ? shortName : fullName}</label>
+                            </div>
+                        ))}
+                    </AccordionDetails>
+                </CustomAccordion>
+            </div>
+
             <div> {/*Remove top line*/}
                 <CustomAccordion disableGutters={true}>
                     <AccordionSummary
