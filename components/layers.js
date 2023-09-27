@@ -41,6 +41,8 @@ const layers = {
             'paint': {
                 'text-color': 'blue',
                 'text-opacity': 0.5,
+                'text-halo-color': '#fff',
+                'text-halo-width': 1,
             },
             'layout': {
                 'text-field': ['get', 'NAME'],
