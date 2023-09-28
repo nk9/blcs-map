@@ -90,7 +90,7 @@ function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
     }
 
     const legend_line = (color, title, shortTitle, isDashed = false) => (
-        <Typography variant="body1" key={title}>
+        <Typography variant="body1" key={title} sx={{ fontSize: '14px' }} >
             <span className={styles["swatch"]} style={{
                 borderColor: color,
                 borderStyle: isDashed ? "dashed" : "solid"
@@ -103,7 +103,7 @@ function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
             borderColor: stroke_color,
             backgroundColor: color
         }}></span>
-        <Typography variant="body1" sx={{ display: 'inline' }}>
+        <Typography variant="body1" sx={{ fontSize: '14px', display: 'inline' }}>
             {isMobile ?
                 (<Tooltip title={title} enterTouchDelay={0}>
                     <span style={underlineStyle}>
@@ -123,7 +123,7 @@ function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
                 borderRightColor: color2,
                 borderBottomColor: color2
             }}></span>
-            <Typography variant="body1" sx={{ display: 'inline' }}>
+            <Typography variant="body1" sx={{ fontSize: '14px', display: 'inline' }}>
                 <Tooltip title={tooltip} enterTouchDelay={0} leaveTouchDelay={4000}>
                     <span style={underlineStyle}>
                         {isMobile ? shortTitle : title}
