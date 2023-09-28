@@ -140,7 +140,7 @@ function ControlPanel({ layers, setLayersVisibility, mapStyle, setMapStyle }) {
             items.push(legend_line('blue', 'Ward Boundaries', 'Wards'))
         }
         if (visibility["parades"]) {
-            items.push(legend_line('orange', 'Shop Parades', 'Shops', true))
+            items.push(legend_line('orange', 'Local Shops', 'Shops', true))
         }
         if (visibility["cycle_routes"]) {
             items.push(legend_line('purple', 'Cycle Routes', 'Cycles'))
