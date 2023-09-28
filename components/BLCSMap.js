@@ -158,7 +158,7 @@ function preparePopup(hoverInfo, feature, styles, setActiveFeature) {
             break;
 
         case "parades":
-            headline = "Shop Parade"
+            headline = "Local Shops"
             infoPairs = defaultInfo()
             break;
 
