@@ -30,7 +30,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 });
 
 const hideableLayers = {
-    'parades': { fullName: "1. Shop parades", shortName: "1. Shops" },
+    'parades': { fullName: "1. Local shops", shortName: "1. Shops" },
     'cycle_routes': { fullName: "2. Safe routes", shortName: "2. Routes" },
     'existing_filters': { fullName: "3. Traffic filters", shortName: "3. Filters" },
     'main_roads': { fullName: "4. Through roads", shortName: "4. Thru" },
